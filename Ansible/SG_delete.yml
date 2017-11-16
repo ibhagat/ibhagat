@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    #your region
+    region: us-east-1
+  tasks:
+    - name: remove security group
+      ec2_group:
+        region: "{{ region }}"
+        #your security group name
+        name: SG_us-east
+        description: sg northverginia
+        state: absent

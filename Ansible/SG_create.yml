@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    #your region
+    region: us-east-1
+    #your ip address
+    allowed_ip: 116.74.234.92/32
+  tasks:
+    - name: create security group
+      ec2_group:
+        region: "{{ region }}" #your security group name
+        name: sg_webserver_useastone
+        description: security group for useastone webserver host
+        rules:
+          # allow ssh access from your ip address
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: "{{ allowed_ip }}"
+          # allow http access from anywhere
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          # allow http access from anywhere
+          - proto: tcp
+            from_port: 443
+            to_port: 443
+            cidr_ip: 0.0.0.0/0            
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0

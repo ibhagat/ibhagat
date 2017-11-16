@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Get record
+      route53:
+        command: get
+        zone: ibhagat.in.
+        record: ibhagat.in.
+        type: A
+      register: rec

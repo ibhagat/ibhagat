@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: create record
+      route53:
+        command: create
+        zone: ibhagat.in.
+        record: ibhagat.in.
+        type: A
+        ttl: 7200
+        overwrite: yes
+        # Public IP address of wordpress server from chapter 4
+        value: 54.236.173.233

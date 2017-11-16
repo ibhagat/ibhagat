@@ -1,0 +1,13 @@
+---
+# Basic decommissioning example
+- name: Delete devel EC2 instances
+  hosts: ec2           # <-- MAGIC IS HERE!
+  connection: local
+  gather_facts: False
+  tasks:
+  - name: Terminate {{ec2_id}} instance in {{aws_region}}
+    local_action:
+        module: ec2
+        state: 'absent'
+        region: '{{aws_region}}'
+        instance_ids: '{{ec2_id}}'

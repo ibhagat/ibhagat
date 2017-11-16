@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+  tasks:
+  - name: ensure apache is absent
+    yum: name=httpd state=absent

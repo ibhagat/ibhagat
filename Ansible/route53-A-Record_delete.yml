@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: delete record
+      route53:
+        command: delete
+        zone: ibhagat.in.
+        record: ibhagat.in.
+        type: A
+        ttl: 7200
+        overwrite: yes
+        value: 54.236.173.233
